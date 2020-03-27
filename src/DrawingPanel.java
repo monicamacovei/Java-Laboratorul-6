@@ -13,20 +13,11 @@ public class DrawingPanel extends JPanel {
     final static int W = 800, H = 600;
     BufferedImage image;
     Graphics2D graphics;
-    JButton saveBtn = new JButton("Save");
-    JButton loadBtn = new JButton("Load");
-    JButton resetBtn = new JButton("Reset");
-    JButton exitBtn = new JButton("Exit");
 
     public DrawingPanel(MainFrame frame) {
         this.frame = frame;
+        createOffscreenImage();
         init();
-    }
-    private void save(ActionEvent e) {
-        try {
-            ImageIO.write(frame.canvas.image, "PNG",
-                    new FileOutputStream("d:/test.png"));
-        } catch (IOException ex) { System.err.println(ex); }
     }
     private void createOffscreenImage() {
         image = new BufferedImage(W, H, BufferedImage.TYPE_INT_ARGB);
