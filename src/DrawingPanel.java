@@ -5,15 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
 public class DrawingPanel extends JPanel {
     protected MainFrame frame;
-    protected int W = 800, H = 600;
+    protected int width = 800, height = 600;
     protected BufferedImage image;
     protected Graphics2D graphics;
+    protected File path = new File("");
 
     public DrawingPanel(MainFrame frame) {
         this.frame = frame;
@@ -21,15 +23,30 @@ public class DrawingPanel extends JPanel {
         createOffscreenImage();
         init();
     }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+    public void resetFrame() {
+        frame.dispose();
+        frame = new MainFrame();
+    }
+
+    public File getPath() {
+        return path;
+    }
+
+    public void setPath(File path) {
+        this.path = path;
+    }
+
     private void createOffscreenImage() {
-        image = new BufferedImage(W, H, BufferedImage.TYPE_INT_ARGB);
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         graphics = image.createGraphics();
-        graphics.setColor(Color.RED); //fill the image with white
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.drawImage(image, 0, 0, null);
     }
     private void init() {
-        setPreferredSize(new Dimension(W, H));
+        setPreferredSize(new Dimension(width, height));
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

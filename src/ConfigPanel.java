@@ -7,7 +7,6 @@ public class ConfigPanel extends JPanel {
     JLabel sidesLabel = new JLabel(); // text
     JSpinner sidesField = new JSpinner(); // input field
     JComboBox colorCombo; // select options
-    JButton submitButton = new JButton("Submit");
 
     public ConfigPanel(MainFrame frame) {
         this.frame = frame;
@@ -28,6 +27,5 @@ public class ConfigPanel extends JPanel {
         add(sidesLabel);
         add(sidesField);
         add(colorCombo);
-        add(submitButton);
     }
 }

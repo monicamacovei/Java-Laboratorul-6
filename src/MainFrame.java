@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
-    static ConfigPanel configPanel;
+    ConfigPanel configPanel;
     ControlPanel controlPanel;
+    ShapeSettings shapeSettings;
     DrawingPanel canvas;
 
     public MainFrame() {
@@ -18,18 +19,27 @@ public class MainFrame extends JFrame {
         rootPane.setPreferredSize(new Dimension(800, 600));
 
         configPanel = new ConfigPanel(this);
+        shapeSettings = new ShapeSettings(this);
         canvas = new DrawingPanel(this);
         canvas.setPreferredSize(new Dimension(800,600));
         controlPanel = new ControlPanel(this);
 
-        configPanel.submitButton.addActionListener(new ActionListener(){
+
+        shapeSettings.submitButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                int sides = (int) configPanel.sidesField.getValue();
+                JComboBox shapeCombo = shapeSettings.getShapeCombo();
+                if(shapeCombo.getSelectedItem() == "Hexagon") {
+                    configPanel.sidesField.setValue(6);
+                }
+                else if(shapeCombo.getSelectedItem() == "Square"){
+                    configPanel.sidesField.setValue(4);
+                }
                 repaint();
             }
         });
 
-        add(configPanel, BorderLayout.NORTH);
+        add(configPanel, BorderLayout.BEFORE_FIRST_LINE);
+        add(shapeSettings, BorderLayout.LINE_START);
         add(canvas, BorderLayout.CENTER);
         add(controlPanel, BorderLayout.SOUTH);
         pack();
