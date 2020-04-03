@@ -19,11 +19,6 @@ public class ConfigPanel extends JPanel {
         String colors[] = {"Random", "Black"};
         colorCombo = new JComboBox(colors);
         colorCombo.setEditable(true);
-        colorCombo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String chosenName =  (String) colorCombo.getSelectedItem();
-            }
-        });
         add(sidesLabel);
         add(sidesField);
         add(colorCombo);
